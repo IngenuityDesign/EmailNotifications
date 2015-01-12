@@ -51,7 +51,7 @@
  * database. Uses database default not specified.
  *
  * sslmode =>
- * For Postgres specifies whether to 'disable', 'allow', 'prefer', or 'require' SSL for the 
+ * For Postgres specifies whether to 'disable', 'allow', 'prefer', or 'require' SSL for the
  * connection. The default value is 'allow'.
  *
  * unix_socket =>
@@ -66,15 +66,30 @@
  * flags =>
  * A key/value array of driver specific connection options.
  */
+
+ /**
+	 * Do some environment lifting with sensible defaults
+	 */
+
+	 $cake_database_user = getenv('DATABASE_USER') ? getenv('DATABASE_USER') : '';
+	 $cake_database_host = getenv('DATABASE_HOST') ? getenv('DATABASE_HOST') : '';
+	 $cake_database_password = getenv('DATABASE_PASSWORD') ? getenv('DATABASE_PASSWORD') : '';
+	 $cake_database_database = getenv('DATABASE_DATABASE') ? getenv('DATABASE_DATABASE') : '';
+
+	 define('DATABASE_USER', $cake_database_user);
+	 define('DATABASE_HOST', $cake_database_host);
+	 define('DATABASE_PASSWORD', $cake_database_password);
+	 define('DATABASE_DATABASE', $cake_database_database);
+
 class DATABASE_CONFIG {
 
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
+		'host' => DATABASE_HOST,
+		'login' => DATABASE_USER,
+		'password' => DATABASE_PASSWORD,
+		'database' => DATABASE_DATABASE,
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
