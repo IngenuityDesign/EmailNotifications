@@ -14,21 +14,22 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+
+		echo $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css');
+
+		echo $this->Html->css('main');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -36,28 +37,49 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
 
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">eBay Email Feedback</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
 		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
+	</nav>
+
+	<!-- Begin page content -->
+	<div class="container">
+
+		<?php echo $this->Session->flash(); ?>
+
+		<?php echo $this->fetch('content'); ?>
+
+		<?php echo $this->element('sql_dump'); ?>
+
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">
+				FOOTER
 			</p>
 		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	</footer>
+
+	<?php
+	echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js');
+	echo $this->Html->script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js');
+	?>
+
 </body>
 </html>
