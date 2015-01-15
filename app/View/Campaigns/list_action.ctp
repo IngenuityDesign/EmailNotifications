@@ -14,6 +14,9 @@
     );
     ?>
 
+    <?php if (count($campaigns) < 1): ?>
+      <p>There are no active campaigns</p>
+    <?php else: ?>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -22,6 +25,7 @@
           <th>Created</th>
           <th><i class="glyphicon glyphicon-thumbs-up"></i></th>
           <th><i class="glyphicon glyphicon-thumbs-down"></i></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -67,16 +71,31 @@
                   'action' => 'submitAction',
                   $obj['id'],
                   'full_base' => true,
-                  '?' => array('response' => 'yes')
+                  '?' => array('response' => 'no')
                 ),
                 array('class' => '', 'target' => '')
               );
               ?>
             </td>
+            <td>
+              <?php
+                echo $this->Html->link(
+                ' ',
+                array(
+                  'controller' => 'Campaigns',
+                  'action' => 'disableAction',
+                  $obj['id'],
+                  'full_base' => true
+                ),
+                array('class' => 'glyphicon glyphicon-remove', 'target' => '')
+              );
+              ?>
+              <a href=""></a></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
+    <?php endif; ?>
 
   </div>
 

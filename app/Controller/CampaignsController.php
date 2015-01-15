@@ -41,7 +41,7 @@ class CampaignsController extends AppController {
     if ($response) {
 
       $this->Campaign->id = $id;
-      if (!$this->Campaign->exists()) {
+      if (!$this->Campaign->exists() || $this->Campaign->field('open') == 0) {
         throw new NotFoundException();
       }
 
@@ -71,15 +71,70 @@ class CampaignsController extends AppController {
     $this->set('campaigns', $this->Campaign->getList());
   }
 
+  public function archivesAction() {
+    $this->set('campaigns', $this->Campaign->getList(true));
+  }
+
   public function viewAction($id) {
 
     $this->Campaign->id = $id;
+
+    if (!$this->Campaign->exists()) {
+      throw new NotFoundException();
+    }
 
     $name = $this->Campaign->field('name');
     $feedback = $this->Campaign->Feedback->findAllByCampaignId($id);
 
     $this->set('feedback', $feedback);
+    $this->Set('name', $name);
     //$feedback = $this->Campaign->Feedback->find('all');
+
+  }
+
+  public function disableAction($id) {
+    $this->Campaign->id = $id;
+
+    if (!$this->Campaign->exists()) {
+      throw new NotFoundException();
+    }
+
+    $this->Campaign->set('open', 0);
+    $this->Campaign->save();
+
+    $this->Session->setFlash(
+      sprintf("Disabled the '%s' campaign.", $this->Campaign->field('name'))
+    );
+
+    return $this->redirect(
+      array(
+        'controller' => 'Campaigns',
+        'action' => 'listAction'
+      )
+    );
+
+  }
+
+  public function enableAction($id) {
+    $this->Campaign->id = $id;
+
+    if (!$this->Campaign->exists()) {
+      throw new NotFoundException();
+    }
+
+    $this->Campaign->set('open', 1);
+    $this->Campaign->save();
+
+    $this->Session->setFlash(
+      sprintf("Enabled the '%s' campaign.", $this->Campaign->field('name'))
+    );
+
+    return $this->redirect(
+      array(
+        'controller' => 'Campaigns',
+        'action' => 'listAction'
+      )
+    );
 
   }
 

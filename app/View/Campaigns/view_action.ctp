@@ -2,6 +2,23 @@
 
   <div class="col-md-offset-2 col-md-8">
 
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
+      <li>
+        <?php
+          echo $this->Html->link(
+            'Listing',
+            array(
+              'controller' => 'Campaigns',
+              'action' => 'listAction',
+              'full_base' => true
+            )
+          );
+        ?>
+      </li>
+      <li class="active"><?php echo $name; ?></li>
+    </ol>
+
     <table class="table table-striped">
       <thead>
         <tr>

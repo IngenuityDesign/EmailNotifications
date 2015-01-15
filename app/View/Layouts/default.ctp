@@ -51,7 +51,29 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li><a href="/">Home</a></li>
+					<li><?php
+						echo $this->Html->link(
+							'Lists',
+							array(
+								'controller' => 'Campaigns',
+								'action' => 'listAction',
+								'full_base' => true
+							),
+							array('class' => '', 'target' => '')
+						);
+					?></li>
+					<li><?php
+						echo $this->Html->link(
+							'Archives',
+							array(
+								'controller' => 'Campaigns',
+								'action' => 'archivesAction',
+								'full_base' => true
+							),
+							array('class' => '', 'target' => '')
+						);
+					?></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -68,14 +90,14 @@
 
 		<?php echo $this->fetch('content'); ?>
 
-		<?php echo $this->element('sql_dump'); ?>
+		<?php //echo $this->element('sql_dump'); ?>
 
 	</div>
 
 	<footer class="footer">
 		<div class="container">
 			<p class="text-muted">
-				FOOTER
+				Copyright &copy; eBay Inc.
 			</p>
 		</div>
 	</footer>
