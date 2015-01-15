@@ -21,18 +21,17 @@ App::uses('AppController', 'Controller');
 * @package       app.Controller
 * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
 */
-class FeedbackController extends AppController {
+class CampaignsController extends AppController {
 
   /**
   * This controller does not use a model
   *
   * @var array
   */
-  public $uses = array('Campaign');
 
   private $validResponses = array('yes', 'no');
 
-  public function submit($id) {
+  public function submitAction($id) {
     $response = isset($this->params['url']['response']) ? $this->params['url']['response'] : false;
 
     if ($response && !in_array($response, $this->validResponses)) {
@@ -41,10 +40,18 @@ class FeedbackController extends AppController {
 
     if ($response) {
 
-      $campaign = $this->Campaign->findById($id);
-      if (!$campaign) throw new NotFoundException();
+      $this->Campaign->id = $id;
+      if (!$this->Campaign->exists()) {
+        throw new NotFoundException();
+      }
 
-      print_r($campaign);
+      $this->Campaign->Feedback->create();
+      $this->Campaign->Feedback->set('response', $response);
+      $this->Campaign->Feedback->set('ip', $_SERVER['REMOTE_ADDR']);
+      $this->Campaign->Feedback->set('campaign_id', $id);
+      $this->Campaign->Feedback->save();
+
+      $this->set('response', $response);
 
     } else {
       // 404
@@ -57,10 +64,10 @@ class FeedbackController extends AppController {
 
   }
 
-  public function all() {
-    $campaigns = $this->Campaign->findAll();
+  public function listAction() {
 
-    $this->set('campaigns', $campaigns);
+
+    $this->set('campaigns', $this->Campaign->getList());
   }
 
 }
