@@ -46,10 +46,13 @@ class CampaignsController extends AppController {
       }
 
       $this->Campaign->Feedback->create();
-      $this->Campaign->Feedback->set('response', $response);
-      $this->Campaign->Feedback->set('ip', $_SERVER['REMOTE_ADDR']);
-      $this->Campaign->Feedback->set('campaign_id', $id);
-      $this->Campaign->Feedback->save();
+      $this->Campaign->Feedback->save(array(
+        'Feedback' => array(
+          'response' => $response,
+          'ip' => $_SERVER['REMOTE_ADDR'],
+          'campaign_id' => $id
+        )
+      ));
 
       $this->set('response', $response);
 
@@ -61,13 +64,59 @@ class CampaignsController extends AppController {
   }
 
   public function index() {
-
+    throw new NotFoundException();
   }
 
   public function listAction() {
-
-
     $this->set('campaigns', $this->Campaign->getList());
+  }
+
+  public function viewAction($id) {
+
+    $this->Campaign->id = $id;
+
+    $name = $this->Campaign->field('name');
+    $feedback = $this->Campaign->Feedback->findAllByCampaignId($id);
+
+    $this->set('feedback', $feedback);
+    //$feedback = $this->Campaign->Feedback->find('all');
+
+  }
+
+  public function createAction() {
+
+    $this->set('name', '');
+
+    if ($this->request['data']) {
+      $name = $this->request['data']['NameField'];
+
+      $this->set('name', $name);
+
+      if (strlen($name) < 4) {
+          $this->Session->setFlash('Your name is too short.');
+          return;
+      }
+
+      $this->Campaign->create();
+      $this->Campaign->save(array(
+        'Campaign' => array(
+          'name' => $name,
+          'open' => 1
+        )
+      ));
+
+      $this->Session->write('Alert.type', 'alert-success');
+      $this->Session->setFlash('Successfully added your campaign');
+
+      return $this->redirect(
+        array(
+          'controller' => 'Campaigns',
+          'action' => 'listAction'
+        )
+      );
+
+    }
+
   }
 
 }

@@ -2,6 +2,18 @@
 
   <div class="col-md-offset-2 col-md-8">
 
+    <?php
+      echo $this->Html->link(
+      'Create New Campaign',
+      array(
+        'controller' => 'Campaigns',
+        'action' => 'createAction',
+        'full_base' => true
+      ),
+      array('class' => 'btn btn-default', 'target' => '')
+    );
+    ?>
+
     <table class="table table-striped">
       <thead>
         <tr>

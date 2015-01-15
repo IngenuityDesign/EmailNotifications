@@ -60,7 +60,11 @@
 	<!-- Begin page content -->
 	<div class="container">
 
-		<?php echo $this->Session->flash(); ?>
+		<?php if ($flash = $this->Session->flash()): ?>
+			<div class="alert <?php echo ($flashType = $this->Session->read('Alert.type')) ? $flashType : 'alert-danger'; ?>" role="alert">
+				<?php echo $flash; ?>
+			</div>
+		<?php endif; ?>
 
 		<?php echo $this->fetch('content'); ?>
 
