@@ -108,7 +108,7 @@ class CampaignsController extends AppController {
 
     return $this->redirect(
       array(
-        'controller' => 'Campaigns',
+        'controller' => 'campaigns',
         'action' => 'listAction'
       )
     );
@@ -131,7 +131,7 @@ class CampaignsController extends AppController {
 
     return $this->redirect(
       array(
-        'controller' => 'Campaigns',
+        'controller' => 'campaigns',
         'action' => 'listAction'
       )
     );
@@ -165,7 +165,7 @@ class CampaignsController extends AppController {
 
       return $this->redirect(
         array(
-          'controller' => 'Campaigns',
+          'controller' => 'campaigns',
           'action' => 'listAction'
         )
       );
