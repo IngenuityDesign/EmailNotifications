@@ -47,33 +47,10 @@
             <td><?php echo $obj['name']; ?></td>
             <td><?php echo $obj['created'] ?></td>
             <td>
-              <?php
-              echo $this->Html->link(
-                $obj['yes'],
-                array(
-                  'controller' => 'campaigns',
-                  'action' => 'submitAction',
-                  'id' => $obj['id'],
-                  '?' => array('response' => 'yes')
-                ),
-                array('class' => '', 'target' => '')
-              );
-              ?>
+              <?php echo $obj['yes']; ?>
             </td>
             <td>
-              <?php
-                echo $this->Html->link(
-                $obj['no'],
-                array(
-                  'controller' => 'campaigns',
-                  'action' => 'submitAction',
-                  'id' => $obj['id'],
-                  'full_base' => true,
-                  '?' => array('response' => 'no')
-                ),
-                array('class' => '', 'target' => '')
-              );
-              ?>
+              <?php echo $obj['no']; ?>
             </td>
             <td>
               <?php
