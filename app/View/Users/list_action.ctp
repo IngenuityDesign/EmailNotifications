@@ -56,7 +56,7 @@
             array('class' => 'glyphicon glyphicon-remove', 'target' => '')
             );
             ?>
-            <a href=""></a></td>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>

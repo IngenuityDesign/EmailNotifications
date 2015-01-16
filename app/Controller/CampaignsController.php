@@ -140,6 +140,25 @@ class CampaignsController extends AppController {
 
   }
 
+  public function deleteAction($id) {
+    $this->Campaign->id = $id;
+
+    if (!$this->Campaign->exists())
+      throw new NotFoundException();
+
+    $this->Campaign->delete($id);
+
+    $this->Session->setFlash('Successfully campaign', 'default', array(), 'success');
+
+    return $this->redirect(
+      array(
+        'controller' => 'campaigns',
+        'action' => 'listAction'
+      )
+    );
+
+  }
+
   public function createAction() {
 
     $this->set('name', '');

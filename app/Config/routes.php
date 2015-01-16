@@ -55,6 +55,12 @@
 		'id' => '[0-9]+')
 	);
 
+	Router::connect('/campaigns/:id/delete', array('controller' => 'campaigns', 'action' => 'deleteAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
 	Router::connect('/feedback/:id', array('controller' => 'campaigns', 'action' => 'submitAction'),
 	array(
 		'pass' => array('id'),
