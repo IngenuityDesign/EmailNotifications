@@ -87,7 +87,8 @@ class CampaignsController extends AppController {
     $feedback = $this->Campaign->Feedback->findAllByCampaignId($id);
 
     $this->set('feedback', $feedback);
-    $this->Set('name', $name);
+    $this->set('name', $name);
+    $this->set('id', $id);
     //$feedback = $this->Campaign->Feedback->find('all');
 
   }
@@ -174,21 +175,26 @@ class CampaignsController extends AppController {
       }
 
       $this->Campaign->create();
-      $this->Campaign->save(array(
+      $newCampaign = $this->Campaign->save(array(
         'Campaign' => array(
-          'name' => $name,
-          'open' => 1
+        'name' => $name,
+        'open' => 1
         )
       ));
 
-      $this->Session->setFlash('Successfully added your campaign', 'default', array(), 'success');
+      if ($newCampaign) {
+        $this->Session->setFlash('Successfully added your campaign', 'default', array(), 'success');
 
-      return $this->redirect(
-        array(
-          'controller' => 'campaigns',
-          'action' => 'listAction'
-        )
-      );
+        return $this->redirect(
+          array(
+            'controller' => 'campaigns',
+            'action' => 'viewAction',
+            'id' => $newCampaign['Campaign']['id']
+          )
+        );
+      } else {
+        $this->Session->setFlash('There was an error adding your campaign.');
+      }
 
     }
 
