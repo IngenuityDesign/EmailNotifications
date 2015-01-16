@@ -43,11 +43,12 @@ class UsersController extends AppController {
 
   public function seedAction() {
     throw new NotFoundException();
+
     $this->User->create();
     $this->User->save(
       array(
         'User' => array(
-          'username' => 'stephen@ingenuitydesign.com',
+          'username' => 'info@ingenuitydesign.com',
           'password' => 'password',
           'role' => 'admin'
         )
@@ -58,6 +59,105 @@ class UsersController extends AppController {
 
   public function logout() {
     return $this->redirect($this->Auth->logout());
+  }
+
+  public function listAction() {
+    $users = $this->User->find('all');
+
+    $this->set('users', $users);
+  }
+
+  public function editAction($id) {
+    $this->User->id = $id;
+
+    if (!$this->User->exists())
+      throw new NotFoundException();
+
+    if ($this->request->is('post')) {
+
+      $password = $this->request->data['User']['password_new']; //->password;
+      $password_confirm = $this->request->data['User']['password_confirm'];
+
+      if (!$password || ($password != $password_confirm)) {
+        $this->Session->setFlash('Please make sure the passwords match');
+      } else {
+        $this->User->set(array(
+          'password' => $password,
+          'role' => $this->request->data['User']['role']
+        ));
+
+        $this->User->save();
+
+        $this->Session->setFlash('User successfully edited', 'default', array(), 'success');
+
+        return $this->redirect(
+          array(
+            'controller' => 'users',
+            'action' => 'listAction'
+          )
+        );
+
+      }
+
+    }
+
+    $username = $this->User->field('username');
+
+    $validRoles = @$this->User->validate['role']['valid']['rule'][1];
+    if (!$validRoles) $validRoles = array();
+
+    $this->set('roles', $validRoles);
+
+    $this->set('username', $username);
+
+  }
+
+  public function createAction() {
+
+    $validRoles = @$this->User->validate['role']['valid']['rule'][1];
+    if (!$validRoles) $validRoles = array();
+
+    if ($this->request->is('post')) {
+
+      $this->User->create();
+      $newObj = $this->request->data;
+      $newObj['User']['role'] = $validRoles[$newObj['User']['role']];
+      $x = $this->User->save($newObj);
+
+      if ($x)
+        $this->Session->setFlash('User created', 'default', array(), 'success');
+      else
+        $this->Session->setFlash('Was unable to create user');
+
+      return $this->redirect(
+        array(
+          'controller' => 'users',
+          'action' => 'listAction'
+        )
+      );
+
+    }
+
+    $this->set('roles', $validRoles);
+  }
+
+  public function deleteAction($id) {
+    $this->User->id = $id;
+
+    if (!$this->User->exists())
+      throw new NotFoundException();
+
+    $this->User->delete($id);
+
+    $this->Session->setFlash('Successfully deleted user', 'default', array(), 'success');
+
+    return $this->redirect(
+      array(
+        'controller' => 'users',
+        'action' => 'listAction'
+      )
+    );
+
   }
 
 }

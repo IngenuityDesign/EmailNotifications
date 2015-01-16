@@ -42,9 +42,8 @@ class AppController extends Controller {
         'action' => 'listAction'
       ),
       'logoutRedirect' => array(
-        'controller' => 'pages',
-        'action' => 'display',
-        'home'
+        'controller' => 'users',
+        'action' => 'loginAction',
       ),
       'authenticate' => array(
         'Form' => array(

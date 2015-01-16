@@ -62,6 +62,25 @@
 	);
 
 
+	Router::connect('/users', array('controller' => 'users', 'action' => 'listAction'));
+	Router::connect('/users/create', array('controller' => 'users', 'action' => 'createAction'));
+
+	Router::connect('/users/:id', array('controller' => 'users', 'action' => 'editAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
+	Router::connect('/users/:id/delete', array('controller' => 'users', 'action' => 'deleteAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
+	//Router::connect('/login', array('controller' => 'users', 'action' => 'loginAction'));
+	//Router::connect('/logout', array('controller' => 'users', 'action' => 'logoutAction'));
+
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
