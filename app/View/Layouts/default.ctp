@@ -71,6 +71,16 @@
 							array('class' => '', 'target' => '')
 						);
 					?></li>
+					<li><?php
+						echo $this->Html->link(
+						'Users',
+						array(
+							'controller' => 'users',
+							'action' => 'listAction'
+						),
+						array('class' => '', 'target' => '')
+					);
+					?></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
