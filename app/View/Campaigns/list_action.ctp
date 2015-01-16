@@ -98,7 +98,7 @@
                   'action' => 'deleteAction',
                   'id' => $obj['id']
                 ),
-                array('class' => 'glyphicon glyphicon-remove', 'target' => '')
+                array('class' => 'glyphicon glyphicon glyphicon-trash', 'target' => '')
               );
               ?>
             </td>

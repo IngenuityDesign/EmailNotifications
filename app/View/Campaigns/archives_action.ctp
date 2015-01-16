@@ -14,6 +14,7 @@
             <th><i class="glyphicon glyphicon-thumbs-up"></i></th>
             <th><i class="glyphicon glyphicon-thumbs-down"></i></th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -87,7 +88,20 @@
               );
             }
             ?>
-            <a href=""></a></td>
+            </td>
+            <td>
+              <?php
+                echo $this->Html->link(
+                ' ',
+                array(
+                  'controller' => 'campaigns',
+                  'action' => 'deleteAction',
+                  'id' => $obj['id']
+                ),
+                array('class' => 'glyphicon glyphicon glyphicon-trash', 'target' => '')
+              );
+              ?>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
