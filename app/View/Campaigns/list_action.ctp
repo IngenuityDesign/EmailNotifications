@@ -6,9 +6,8 @@
       echo $this->Html->link(
       'Create New Campaign',
       array(
-        'controller' => 'Campaigns',
-        'action' => 'createAction',
-        'full_base' => true
+        'controller' => 'campaigns',
+        'action' => 'createAction'
       ),
       array('class' => 'btn btn-default', 'target' => '')
     );
@@ -36,9 +35,9 @@
               echo $this->Html->link(
                 $obj['id'],
                 array(
-                  'controller' => 'Campaigns',
+                  'controller' => 'campaigns',
                   'action' => 'viewAction',
-                  $obj['id'],
+                  'id' => $obj['id'],
                   'full_base' => true
                 ),
                 array('class' => '', 'target' => '')
@@ -52,10 +51,9 @@
               echo $this->Html->link(
                 $obj['yes'],
                 array(
-                  'controller' => 'Campaigns',
+                  'controller' => 'campaigns',
                   'action' => 'submitAction',
-                  $obj['id'],
-                  'full_base' => true,
+                  'id' => $obj['id'],
                   '?' => array('response' => 'yes')
                 ),
                 array('class' => '', 'target' => '')
@@ -67,9 +65,9 @@
                 echo $this->Html->link(
                 $obj['no'],
                 array(
-                  'controller' => 'Campaigns',
+                  'controller' => 'campaigns',
                   'action' => 'submitAction',
-                  $obj['id'],
+                  'id' => $obj['id'],
                   'full_base' => true,
                   '?' => array('response' => 'no')
                 ),
@@ -82,10 +80,9 @@
                 echo $this->Html->link(
                 ' ',
                 array(
-                  'controller' => 'Campaigns',
+                  'controller' => 'campaigns',
                   'action' => 'disableAction',
-                  $obj['id'],
-                  'full_base' => true
+                  'id' => $obj['id']
                 ),
                 array('class' => 'glyphicon glyphicon-remove', 'target' => '')
               );

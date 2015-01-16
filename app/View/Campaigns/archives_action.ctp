@@ -24,9 +24,9 @@
                 echo $this->Html->link(
                 $obj['id'],
                 array(
-                  'controller' => 'Campaigns',
+                  'controller' => 'campaigns',
                   'action' => 'viewAction',
-                  $obj['id'],
+                  'id' => $obj['id'],
                   'full_base' => true
                 ),
                 array('class' => '', 'target' => '')
@@ -40,10 +40,9 @@
               echo $this->Html->link(
               $obj['yes'],
               array(
-                'controller' => 'Campaigns',
+                'controller' => 'campaigns',
                 'action' => 'submitAction',
-                $obj['id'],
-                'full_base' => true,
+                'id' => $obj['id'],
                 '?' => array('response' => 'yes')
               ),
               array('class' => '', 'target' => '')
@@ -53,15 +52,14 @@
           <td>
             <?php
             echo $this->Html->link(
-            $obj['no'],
-            array(
-            'controller' => 'Campaigns',
-            'action' => 'submitAction',
-            $obj['id'],
-            'full_base' => true,
-            '?' => array('response' => 'no')
-            ),
-            array('class' => '', 'target' => '')
+              $obj['no'],
+              array(
+                'controller' => 'campaigns',
+                'action' => 'submitAction',
+                'id' => $obj['id'],
+                '?' => array('response' => 'no')
+              ),
+              array('class' => '', 'target' => '')
             );
             ?>
           </td>
@@ -71,10 +69,9 @@
               echo $this->Html->link(
                 ' ',
                 array(
-                  'controller' => 'Campaigns',
+                  'controller' => 'campaigns',
                   'action' => 'disableAction',
-                  $obj['id'],
-                  'full_base' => true
+                  'id' => $obj['id']
                 ),
                 array('class' => 'glyphicon glyphicon-ok', 'target' => '')
               );
@@ -82,10 +79,9 @@
               echo $this->Html->link(
                 ' ',
                 array(
-                'controller' => 'Campaigns',
+                'controller' => 'campaigns',
                 'action' => 'enableAction',
-                $obj['id'],
-                'full_base' => true
+                'id' => $obj['id']
                 ),
                 array('class' => 'glyphicon glyphicon-remove', 'target' => '')
               );

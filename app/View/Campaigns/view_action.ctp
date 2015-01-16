@@ -9,9 +9,8 @@
           echo $this->Html->link(
             'Listing',
             array(
-              'controller' => 'Campaigns',
-              'action' => 'listAction',
-              'full_base' => true
+              'controller' => 'campaigns',
+              'action' => 'listAction'
             )
           );
         ?>

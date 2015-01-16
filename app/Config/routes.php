@@ -31,6 +31,38 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**
+	* ...and connect the rest of 'Pages' controller's URLs.
+	*/
+	Router::connect('/campaigns', array('controller' => 'campaigns', 'action' => 'listAction'));
+	Router::connect('/campaigns/archives', array('controller' => 'campaigns', 'action' => 'archivesAction'));
+	Router::connect('/campaigns/create', array('controller' => 'campaigns', 'action' => 'createAction'));
+
+	Router::connect('/campaigns/:id', array('controller' => 'campaigns', 'action' => 'viewAction'),
+		array(
+			'pass' => array('id'),
+			'id' => '[0-9]+')
+	);
+
+	Router::connect('/campaigns/:id/disable', array('controller' => 'campaigns', 'action' => 'disableAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
+	Router::connect('/campaigns/:id/enable', array('controller' => 'campaigns', 'action' => 'enableAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
+	Router::connect('/feedback/:id', array('controller' => 'campaigns', 'action' => 'submitAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
+
+/**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */

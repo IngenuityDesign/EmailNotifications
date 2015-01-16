@@ -56,9 +56,8 @@
 						echo $this->Html->link(
 							'Lists',
 							array(
-								'controller' => 'Campaigns',
-								'action' => 'listAction',
-								'full_base' => true
+								'controller' => 'campaigns',
+								'action' => 'listAction'
 							),
 							array('class' => '', 'target' => '')
 						);
@@ -67,9 +66,8 @@
 						echo $this->Html->link(
 							'Archives',
 							array(
-								'controller' => 'Campaigns',
-								'action' => 'archivesAction',
-								'full_base' => true
+								'controller' => 'campaigns',
+								'action' => 'archivesAction'
 							),
 							array('class' => '', 'target' => '')
 						);
