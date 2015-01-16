@@ -84,7 +84,7 @@
                   'action' => 'disableAction',
                   'id' => $obj['id']
                 ),
-                array('class' => 'glyphicon glyphicon-remove', 'target' => '')
+                array('class' => 'glyphicon glyphicon-ok', 'target' => '')
               );
               ?>
             </td>
