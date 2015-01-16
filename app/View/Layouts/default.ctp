@@ -80,8 +80,14 @@
 	<!-- Begin page content -->
 	<div class="container">
 
+		<?php if ($flash = $this->Session->flash('success')): ?>
+			<div class="alert alert-success" role="alert">
+				<?php echo $flash; ?>
+			</div>
+		<?php endif; ?>
+
 		<?php if ($flash = $this->Session->flash()): ?>
-			<div class="alert <?php echo ($flashType = $this->Session->read('Alert.type')) ? $flashType : 'alert-danger'; ?>" role="alert">
+			<div class="alert alert-danger" role="alert">
 				<?php echo $flash; ?>
 			</div>
 		<?php endif; ?>

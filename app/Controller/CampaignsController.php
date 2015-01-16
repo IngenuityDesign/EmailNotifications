@@ -102,9 +102,9 @@ class CampaignsController extends AppController {
     $this->Campaign->set('open', 0);
     $this->Campaign->save();
 
-    $this->Session->write('Alert.type', 'alert-success');
     $this->Session->setFlash(
-      sprintf("Disabled the '%s' campaign.", $this->Campaign->field('name'))
+      sprintf("Disabled the '%s' campaign.", $this->Campaign->field('name')),
+      'default', array(), 'good'
     );
 
     return $this->redirect(
@@ -126,9 +126,9 @@ class CampaignsController extends AppController {
     $this->Campaign->set('open', 1);
     $this->Campaign->save();
 
-    $this->Session->write('Alert.type', 'alert-success');
     $this->Session->setFlash(
-      sprintf("Enabled the '%s' campaign.", $this->Campaign->field('name'))
+      sprintf("Enabled the '%s' campaign.", $this->Campaign->field('name')),
+      'default', array(), 'success'
     );
 
     return $this->redirect(
@@ -162,8 +162,7 @@ class CampaignsController extends AppController {
         )
       ));
 
-      $this->Session->write('Alert.type', 'alert-success');
-      $this->Session->setFlash('Successfully added your campaign');
+      $this->Session->setFlash('Successfully added your campaign', 'default', array(), 'success');
 
       return $this->redirect(
         array(

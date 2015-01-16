@@ -26,7 +26,7 @@ class Campaign extends AppModel {
   }
 
   public function getList($archives = false) {
-    
+
     if ($archives) $campaigns = $this->find('all');
     else $campaigns = $this->findAllByOpen('1');
 
@@ -54,7 +54,7 @@ class Campaign extends AppModel {
 
 /*
 CREATE TABLE `campaigns` (
-id INT(30) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 open TINYINT(1) NOT NULL,
 name VARCHAR(100) NOT NULL

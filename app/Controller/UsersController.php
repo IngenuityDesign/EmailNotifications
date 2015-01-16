@@ -21,45 +21,43 @@ App::uses('AppController', 'Controller');
 * @package       app.Controller
 * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
 */
-class CampaignsController extends AppController {
+class UsersController extends AppController {
 
-  /**
-  * This controller does not use a model
-  *
-  * @var array
-  */
+  public function beforeFilter() {
+    parent::beforeFilter();
+    $this->Auth->allow('add');
+  }
 
-  private $validResponses = array('yes', 'no');
+  public function login() {
 
-  public function submit($id) {
-    $response = isset($this->params['url']['response']) ? $this->params['url']['response'] : false;
+    if ($this->request->is('post')) {
+      if ($this->Auth->login()) {
+        return $this->redirect($this->Auth->redirectUrl());
+      }
 
-    if ($response && !in_array($response, $this->validResponses)) {
-      $response = false;
-    }
+      $this->Session->setFlash('Username or password is incorrect');
 
-    if ($response) {
-
-      $campaign = $this->Campaign->findById($id);
-      if (!$campaign) throw new NotFoundException();
-
-
-
-    } else {
-      // 404
-      throw new NotFoundException();
     }
 
   }
 
-  public function index() {
+  public function seedAction() {
+    throw new NotFoundException();
+    $this->User->create();
+    $this->User->save(
+      array(
+        'User' => array(
+          'username' => 'stephen@ingenuitydesign.com',
+          'password' => 'password',
+          'role' => 'admin'
+        )
+      )
+    );
 
   }
 
-  public function all() {
-    $campaigns = $this->Campaign->findAll();
-
-    $this->set('campaigns', $campaigns);
+  public function logout() {
+    return $this->redirect($this->Auth->logout());
   }
 
 }
