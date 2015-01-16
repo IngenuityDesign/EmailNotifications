@@ -153,7 +153,7 @@ class CampaignsController extends AppController {
     return $this->redirect(
       array(
         'controller' => 'campaigns',
-        'action' => 'listAction'
+        'action' => 'archivesAction'
       )
     );
 
