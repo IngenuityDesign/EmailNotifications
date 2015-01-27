@@ -33,7 +33,7 @@ body {
 
 .feedback-wrapper {
   text-align: center;
-  padding-top: 80px;
+  padding-top: 130px;
 }
 
 .feedback-wrapper h1,
@@ -58,5 +58,4 @@ body {
   font-size: 26px;
   line-height:35px;
   font-weight: 200;
-
 }

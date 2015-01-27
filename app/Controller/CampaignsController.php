@@ -32,6 +32,9 @@ class CampaignsController extends AppController {
   private $validResponses = array('yes', 'no');
 
   public function submitAction($id) {
+
+    $this->layout = 'basic';
+
     $response = isset($this->params['url']['response']) ? $this->params['url']['response'] : false;
 
     if ($response && !in_array($response, $this->validResponses)) {
