@@ -29,7 +29,7 @@
                 'action' => 'submitAction',
                 'id' => $id,
                 'full_base' => true,
-                '?' => array('response' => 'no')
+                '?' => array('response' => 'yes')
               )
             ); ?>">
         </div>

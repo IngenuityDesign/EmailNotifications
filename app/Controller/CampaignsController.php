@@ -58,6 +58,7 @@ class CampaignsController extends AppController {
       ));
 
       $this->set('response', $response);
+      $this->set('feedback', $this->Campaign->Feedback);
 
     } else {
       // 404
