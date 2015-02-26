@@ -55,6 +55,7 @@ class AppController extends Controller {
 
   public function beforeFilter() {
     $this->Auth->allow('submitAction');
+    $this->Auth->allow('updateFeedbackAction');
   }
   //...
 

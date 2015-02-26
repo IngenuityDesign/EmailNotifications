@@ -27,8 +27,13 @@ class Campaign extends AppModel {
 
   public function getList($archives = false) {
 
-    if ($archives) $campaigns = $this->find('all');
-    else $campaigns = $this->findAllByOpen('1');
+    if ($archives) $campaigns = $this->find('all', array(
+      'order' => array('Campaign.created' => 'desc')
+    ));
+    else $campaigns = $this->find('all', array(
+      'order' => array('Campaign.created' => 'desc'),
+      'conditions' => array('Campaign.open' => '1')
+    ));
 
     $returnObject = array();
 

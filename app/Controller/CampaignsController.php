@@ -112,7 +112,10 @@ class CampaignsController extends AppController {
     }
 
     $name = $this->Campaign->field('name');
-    $feedback = $this->Campaign->Feedback->findAllByCampaignId($id);
+    $feedback = $this->Campaign->Feedback->find('all', array(
+      'order' => array('Feedback.created' => 'desc'),
+      'conditions' => array('Feedback.campaign_id' => $id)
+    )); //findAllByCampaignId($id);
 
     $this->set('feedback', $feedback);
     $this->set('name', $name);
@@ -234,7 +237,7 @@ class CampaignsController extends AppController {
     
     $feedback = $this->request['data']['Feedback'];
     $id = $feedback['feedbackId'];
-    $responseId = $feedback['Message'];
+    $responseId = array_key_exists('message', $feedback) ? $feedback['Message'] : -1;
 
     if ($responseId == -1) {
       $responseMessage = $feedback['CustomMessage'];

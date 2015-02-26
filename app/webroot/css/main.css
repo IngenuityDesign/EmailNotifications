@@ -101,3 +101,23 @@ body {
 .feedback-wrapper p {
   margin: 1.5em 0;
 }
+
+.response-wrapper .input-group-addon,
+.response-wrapper .input-group > .form-control,
+.response-wrapper .input-group > label {
+  border: 0px;
+  background-color: transparent;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+}
+
+.response-wrapper .input-group-addon {
+  vertical-align: top;
+}
+
+.response-wrapper .input-group > label {
+  padding-top: 0px;
+}
