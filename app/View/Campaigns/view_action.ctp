@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-md-offset-2 col-md-8">
+  <div class="col-md-offset-1 col-md-10">
 
     <ol class="breadcrumb">
       <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
@@ -58,6 +58,7 @@
           <th>IP</th>
           <th>Created</th>
           <th>Response</th>
+          <th>Message</th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +68,7 @@
             <td><?php echo $obj['ip']; ?></td>
             <td><?php echo $obj['created'] ?></td>
             <td><?php echo ucwords($obj['response']) ?></td>
+            <td><?php echo $obj['message']; ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

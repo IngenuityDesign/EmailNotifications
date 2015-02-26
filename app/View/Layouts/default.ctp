@@ -73,6 +73,16 @@
 					?></li>
 					<li><?php
 						echo $this->Html->link(
+						'Responses',
+						array(
+							'controller' => 'responses',
+							'action' => 'listAction'
+						),
+						array('class' => '', 'target' => '')
+					);
+					?></li>
+					<li><?php
+						echo $this->Html->link(
 						'Users',
 						array(
 							'controller' => 'users',

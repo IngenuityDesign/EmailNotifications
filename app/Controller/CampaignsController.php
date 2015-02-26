@@ -30,6 +30,25 @@ class CampaignsController extends AppController {
   */
 
   private $validResponses = array('yes', 'no');
+  public $uses = array('Campaign', 'Response');
+
+  public function clarifyAction($id) {
+    $this->layout = 'basic';
+
+
+
+  }
+
+  private function filterResponseArray( $array, $clarifies ) {
+    
+    return array_filter($array, function($v) use ($clarifies) {
+
+      $x = strcasecmp($clarifies, $v['Response']['clarifies']);
+      
+      return $x === 0;
+
+    });
+  }
 
   public function submitAction($id) {
 
@@ -57,6 +76,11 @@ class CampaignsController extends AppController {
         )
       ));
 
+      $responses = $this->Response->getList();
+      // We need to filter them out based on the response
+      $custom_responses = $this->filterResponseArray($this->Response->getList(), $response);
+
+      $this->set('custom_responses', $custom_responses);
       $this->set('response', $response);
       $this->set('feedback', $this->Campaign->Feedback);
 
@@ -201,6 +225,42 @@ class CampaignsController extends AppController {
       }
 
     }
+
+  }
+
+  public function updateFeedbackAction() {
+
+    $this->layout = 'basic';
+    
+    $feedback = $this->request['data']['Feedback'];
+    $id = $feedback['feedbackId'];
+    $responseId = $feedback['Message'];
+
+    if ($responseId == -1) {
+      $responseMessage = $feedback['CustomMessage'];
+    } else {
+      // in here
+      $response = $this->Response;
+      $response->id = $responseId;
+
+      if (!$response->exists()) {
+        throw new BadRequestException();
+      }
+
+      $response = $this->Response->findById($responseId);
+      $responseMessage = $response['Response']['label'];
+
+    }
+
+    $feedback = $this->Campaign->Feedback;
+    $feedback->id = $id;
+
+    if (!$feedback->exists()) {
+      return BadRequestException();
+    }
+    
+    $feedback->set('message', $responseMessage);
+    $feedback->save();
 
   }
 

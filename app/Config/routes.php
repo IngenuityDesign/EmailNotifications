@@ -67,6 +67,8 @@
 		'id' => '[0-9]+')
 	);
 
+	Router::connect('/feedback/clarify', array('controller' => 'campaigns', 'action' => 'updateFeedbackAction'));
+
 
 	Router::connect('/users', array('controller' => 'users', 'action' => 'listAction'));
 	Router::connect('/users/create', array('controller' => 'users', 'action' => 'createAction'));
@@ -78,6 +80,14 @@
 	);
 
 	Router::connect('/users/:id/delete', array('controller' => 'users', 'action' => 'deleteAction'),
+	array(
+		'pass' => array('id'),
+		'id' => '[0-9]+')
+	);
+
+	Router::connect('/responses', array('controller' => 'responses', 'action' => 'listAction'));
+	Router::connect('/responses/create', array('controller' => 'responses', 'action' => 'createAction'));
+	Router::connect('/responses/:id/delete', array('controller' => 'responses', 'action' => 'deleteAction'),
 	array(
 		'pass' => array('id'),
 		'id' => '[0-9]+')
