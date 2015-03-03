@@ -18,7 +18,7 @@
       <li class="active">Create</li>
     </ol>
 
-    <?php echo $this->Form->create('Response', array('class' => 'form')); ?>
+    <?php echo $this->Form->create('ResponseType', array('class' => 'form')); ?>
 
     <h2 class="form-signin-heading">Create a response</h2>
 
@@ -30,6 +30,17 @@
         'autofocus' => '',
         'type' => "text",
         'label' => "Label"
+      )); ?>
+    </div>
+
+    <div class="form-group">
+      <?php echo $this->Form->input('message', array(
+        'class' => 'form-control',
+        'placeholder' => "",
+        'required' => '',
+        'autofocus' => '',
+        'type' => "text",
+        'label' => "Message"
       )); ?>
     </div>
 

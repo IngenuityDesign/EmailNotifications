@@ -12,15 +12,23 @@ class Feedback extends AppModel {
     )
   );
 
+  public $hasOne = array(
+	'Comment' => array(
+		'className' => 'ResponseComment')
+	);
+
+  public $hasMany = array(
+  	'Response' => array(
+    	'className' => 'Response')
+  	);
+
 }
 
 /*
 CREATE TABLE `feedback` (
 id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 ip VARCHAR(255) NOT NULL,
-response VARCHAR(5) NOT NULL,
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 campaign_id INT(30) NOT NULL,
-message TEXT NOT NULL
 );
 */

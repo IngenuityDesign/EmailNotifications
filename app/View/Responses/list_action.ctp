@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-md-offset-2 col-md-8">
+  <div class="col-md-offset-1 col-md-10">
 
     <?php
       echo $this->Html->link(
@@ -26,9 +26,10 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($responses as $response): $obj = $response['Response']; ?>
+        <?php foreach ($responses as $response): $obj = $response['ResponseType']; ?>
           <tr>
           <td><?php echo $obj['label']; ?></td>
+          <td><?php echo $obj['message'] ?></td>
           <td><?php echo $obj['clarifies'] ?></td>
           <td>
             <?php

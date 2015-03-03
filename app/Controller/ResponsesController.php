@@ -30,10 +30,12 @@ class ResponsesController extends AppController {
   * @var array
   */
 
+  public $uses = array('Response', 'ResponseType');
+
   private $options = array('yes', 'no');
 
   public function listAction() {
-    $this->set('responses', $this->Response->getList());
+    $this->set('responses', $this->ResponseType->getList());
     $this->set('options', $this->options);
   }
 
@@ -43,8 +45,8 @@ class ResponsesController extends AppController {
 
     $this->set('label', '');
     $this->set('options', $opts);
-
-    if ($this->request['data'] && $response = $this->request['data']['Response']) {
+    
+    if ($this->request['data'] && $response = $this->request['data']['ResponseType']) {
       if (!array_key_exists('label', $response) || !array_key_exists('clarifies', $response)) {
         $this->Session->setFlash('Something was wrong with your submission');
         return;
@@ -59,14 +61,22 @@ class ResponsesController extends AppController {
         return;
       }
 
+      if (!array_key_exists('message', $response)) {
+        $this->Session->setFlash('Please create a proper message');
+        return;
+      }
+
+      $message = $response['message'];
+
       $clarifies = $opts[$response['clarifies']];
 
       $this->Response->create();
-      $newResponse = $this->Response->save(array(
-        'Response' => array(
+      $newResponse = $this->ResponseType->save(array(
+        'ResponseType' => array(
           'clarifies' => 'no',
           'label' => $label,
-          'active' => 1
+          'active' => 1,
+          'message' => $message
         )
       ));
 
