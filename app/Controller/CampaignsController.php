@@ -30,11 +30,10 @@ class CampaignsController extends AppController {
   */
 
   private $validResponses = array('yes', 'no');
-  public $uses = array('Campaign', 'Response');
+  public $uses = array('Campaign', 'Response', 'ResponseType', 'ResponseComment');
 
   public function clarifyAction($id) {
     $this->layout = 'basic';
-
 
 
   }
@@ -43,7 +42,7 @@ class CampaignsController extends AppController {
     
     return array_filter($array, function($v) use ($clarifies) {
 
-      $x = strcasecmp($clarifies, $v['Response']['clarifies']);
+      $x = strcasecmp($clarifies, $v['ResponseType']['clarifies']);
       
       return $x === 0;
 
@@ -76,9 +75,8 @@ class CampaignsController extends AppController {
         )
       ));
 
-      $responses = $this->Response->getList();
       // We need to filter them out based on the response
-      $custom_responses = $this->filterResponseArray($this->Response->getList(), $response);
+      $custom_responses = $this->filterResponseArray($this->ResponseType->getList(), $response);
 
       $this->set('custom_responses', $custom_responses);
       $this->set('response', $response);
@@ -96,6 +94,8 @@ class CampaignsController extends AppController {
   }
 
   public function listAction() {
+
+    $this->set('response_types', $this->ResponseType->getList());
     $this->set('campaigns', $this->Campaign->getList());
   }
 
@@ -236,34 +236,56 @@ class CampaignsController extends AppController {
     $this->layout = 'basic';
     
     $feedback = $this->request['data']['Feedback'];
-    $id = $feedback['feedbackId'];
-    $responseId = array_key_exists('message', $feedback) ? $feedback['Message'] : -1;
+    $id = $feedback['FeedbackID'];
 
-    if ($responseId == -1) {
-      $responseMessage = $feedback['CustomMessage'];
-    } else {
-      // in here
-      $response = $this->Response;
-      $response->id = $responseId;
+    // FeedbackID is the id of the feedback
+    // ResponseType is an array of key value pairs. Keys are ResponseType ids. value is 1 if on, 0 if off
+    // CustomMessage is the comment if it exists
 
-      if (!$response->exists()) {
-        throw new BadRequestException();
-      }
+    $theFeedback = $this->Campaign->Feedback;
+    $theFeedback->id = $id;
 
-      $response = $this->Response->findById($responseId);
-      $responseMessage = $response['Response']['label'];
-
-    }
-
-    $feedback = $this->Campaign->Feedback;
-    $feedback->id = $id;
-
-    if (!$feedback->exists()) {
+    if (!$theFeedback->exists()) {
       return BadRequestException();
     }
+
+    $comment = $feedback['CustomMessage'] ? $feedback['CustomMessage'] : false;
+
+    $types = array();
+    // in here
+    if (isset($feedback['ResponseType']) && count($feedback['ResponseType']) > 0) {
+      foreach ($feedback['ResponseType'] as $typeId => $yepnope): 
+        if ($yepnope == 1) {
+          $aResponseType = $this->ResponseType;
+          $aResponseType->id = $typeId;
+
+          if (!$aResponseType->exists()) {
+            throw new BadRequestException();
+          }
+
+          $this->Response->create();
+          $this->Response->save(array(
+            'Response' => array(
+              'response_type' => $typeId,
+              'feedback_id' => $id
+            )
+          ));
+
+        }
+      endforeach; 
+    }
+
+    if ($comment) {
+      $this->ResponseComment->create();
+      $this->ResponseComment->save(array(
+        'ResponseComment' => array(
+          'comment' => $comment,
+          'feedback_id' => $id
+        )
+      ));
+    }
     
-    $feedback->set('message', $responseMessage);
-    $feedback->save();
+    $theFeedback->save();
 
   }
 

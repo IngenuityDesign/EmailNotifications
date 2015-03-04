@@ -9,6 +9,13 @@ class ResponseComment extends AppModel {
   			'foreignKey' => 'feedback_id')
   	);
 
+  public $validate = array(
+	    'feedback_id' => array(
+	        'rule' => 'isUnique',
+	        'message' => 'This feedback has already been commented on.'
+	    )
+	);
+
   public $id, $created, $comment, $feedback_id;
 
 }

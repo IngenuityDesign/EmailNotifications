@@ -2,7 +2,6 @@
 App::uses('AppModel', 'Model');
 
 class Feedback extends AppModel {
-
   public $id, $ip, $response, $created;
 
   public $belongsTo = array(

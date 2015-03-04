@@ -17,22 +17,54 @@ class Campaign extends AppModel {
     $yes = 0;
     $no = 0;
 
+    $comments = array();
+    $types = array();
+
     foreach($feedback as $feedbackItem) {
       if ($feedbackItem['response'] == 'yes') $yes++;
       else $no++;
+
+      $comment = $feedbackItem['Comment'];
+
+      if ($comment && $comment['comment']) {
+        $comment_text = $comment['comment'];
+        $comments[] = $comment_text;
+      } else {
+        $comment_text = '';
+      }
+
+      
+
+      $response = $feedbackItem['Response'];
+
+      if (count($response) > 0) {
+        foreach($response as $k => $res) {
+          $rId = $res['id'];
+          if (!array_key_exists($rId, $types)) $types[$rId] = 0;
+          $types[$rId]++; // = $types[$rId]++;
+        }
+      }
+      
     }
 
-    return array($yes,$no);
+    return array(
+      'yes' => $yes,
+      'no' => $no,
+      'comments' => $comments,
+      'types' => $types
+    );
   }
 
   public function getList($archives = false) {
 
     if ($archives) $campaigns = $this->find('all', array(
-      'order' => array('Campaign.created' => 'desc')
+      'order' => array('Campaign.created' => 'desc'),
+      'recursive' => 2
     ));
     else $campaigns = $this->find('all', array(
       'order' => array('Campaign.created' => 'desc'),
-      'conditions' => array('Campaign.open' => '1')
+      'conditions' => array('Campaign.open' => '1'),
+      'recursive' => 2
     ));
 
     $returnObject = array();
@@ -42,10 +74,15 @@ class Campaign extends AppModel {
       $theCampaign = $campaign['Campaign'];
       $theFeedback = $campaign['Feedback'];
 
-      list($yes, $no) = $this->responseCategories($theFeedback);
+      $responses = $this->responseCategories($theFeedback);
 
-      $theCampaign['yes'] = $yes;
-      $theCampaign['no'] = $no;
+
+      $theCampaign['yes'] = $responses['yes'];
+      $theCampaign['no'] = $responses['no'];
+      $theCampaign['comments'] = $responses['comments'];
+      $theCampaign['types'] = $responses['types'];
+
+      // Now we need to do it for the custom types
 
       $returnObject[] = $theCampaign;
 

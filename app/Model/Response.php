@@ -15,7 +15,7 @@ class Response extends AppModel {
   public $id, $created, $active, $label, $clarifies;
 
   public function getList() {
-    $responses = $this->findAllByActive('1');
+    $responses = $this->find('all');
     return $responses;
   }
 

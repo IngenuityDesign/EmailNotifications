@@ -121,3 +121,11 @@ body {
 .response-wrapper .input-group > label {
   padding-top: 0px;
 }
+
+.subtable-wrapper, .subtable-wrapper td {
+  padding: 0 !important;
+}
+
+.subtable-wrapper table {
+  margin: 0 !important;
+}
