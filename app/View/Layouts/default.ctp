@@ -51,7 +51,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><?php
+					<!--li><?php
 						echo $this->Html->link(
 							'Lists',
 							array(
@@ -60,17 +60,7 @@
 							),
 							array('class' => '', 'target' => '')
 						);
-					?></li>
-					<li><?php
-						echo $this->Html->link(
-							'Archives',
-							array(
-								'controller' => 'campaigns',
-								'action' => 'archivesAction'
-							),
-							array('class' => '', 'target' => '')
-						);
-					?></li>
+					?></li-->
 					<li><?php
 						echo $this->Html->link(
 						'Responses',

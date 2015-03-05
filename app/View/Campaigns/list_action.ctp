@@ -1,6 +1,8 @@
 <div class="row">
 
   <div class="col-md-12">
+    <h2 style=""><img src="/img/dialogue.png"></h2>
+    <h1>Feedback</h1>
 
     <?php
       echo $this->Html->link(
@@ -17,25 +19,25 @@
       <p>There are no active campaigns</p>
     <?php else: ?>
       
-    <table class="table table-striped">
+    <table class="table table-striped table-main" id="table-main">
       <thead>
         <tr>
-          <th>Email</th>
-          <th>Yes</th>
-          <th>No</th>
+          <th class="email">Email</th>
+          <th class="yes">Yes</th>
+          <th class="no">No</th>
           <!-- Dynamic -->
           <?php foreach ($response_types as $response_type): $obj = $response_type['ResponseType'];
             if (!$obj) continue; ?>
-            <th><?php echo $obj['label']; ?></th>
+            <th class="response-type"><?php echo $obj['label']; ?></th>
           <?php endforeach; ?>
           <!-- End Dynamic -->
-          <th>Comments</th>
+          <th class="comments">Comments</th>
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($campaigns as $obj): ?>
-          <tr>
-            <td scope="row">
+        <?php foreach ($campaigns as $k => $obj): ?>
+          <tr class="<?php echo $k%2 == 0 ? 'white' : 'gray'; ?>">
+            <td scope="row" class="email">
               <?php
               echo $this->Html->link(
                 $obj['name'],
@@ -49,15 +51,15 @@
               );
               ?>
             </td>
-            <td>
+            <td class="yes">
               <?php echo $obj['yes']; ?>
             </td>
-            <td>
+            <td class="no">
               <?php echo $obj['no']; ?>
             </td>
             <?php foreach ($response_types as $response_type): $rObj = $response_type['ResponseType'];
               if (!$rObj) continue; ?>
-              <td>
+              <td class="response-type">
               <?php
               $types = $obj['types'];
               if (array_key_exists($rObj['id'], $types)) {
@@ -81,25 +83,26 @@
               );
               ?>
             </td-->
-            <td>
+            <td class="comments">
               <?php $numComments = count($obj['comments']); ?>
               <?php if ($numComments < 1): ?>
                 0
               <?php else: ?>
-              <a data-toggle="collapse" href="#collapse-comments-<?php echo $obj['id']; ?>">
-              <?php echo $numComments; ?> <i class="glyphicon glyphicon-chevron-right"></i></a>
+              <a data-toggle="collapse" class="collapsed" href="#collapse-comments-<?php echo $obj['id']; ?>">
+              <?php echo $numComments; ?> <i class="glyphicon glyphicon-chevron-down open"></i><i class="glyphicon glyphicon-chevron-right closed"></i>
+              </a>
               <?php endif; ?>
             </td>
           </tr>
           <?php if (count($obj['comments'] > 0)): ?>
           <tr class="subtable-wrapper">
-            <td colspan="6" width="100%">
+            <td colspan="<?php echo (4 + count($response_types)); ?>" width="100%">
               <div class="collapse" id="collapse-comments-<?php echo $obj['id']; ?>">
-                <table class="table table-striped">
+                <table class="table table-striped comments-table">
                   <?php foreach($obj['comments'] as $k => $comment): ?>
                   <tr>
-                    <td><?php echo $k + 1; ?></td>
-                    <td><?php echo $comment; ?></td>
+                    <td class="comment-id"><div><?php echo $k + 1; ?></div></td>
+                    <td class="comment-text"><p><?php echo $comment; ?></p></td>
                   </tr>
                   <?php endforeach; ?>
                 </table>

@@ -39,9 +39,9 @@ class Campaign extends AppModel {
 
       if (count($response) > 0) {
         foreach($response as $k => $res) {
-          $rId = $res['id'];
+          $rId = $res['response_type'];
           if (!array_key_exists($rId, $types)) $types[$rId] = 0;
-          $types[$rId]++; // = $types[$rId]++;
+          $types[$rId]  = $types[$rId] + 1;
         }
       }
       

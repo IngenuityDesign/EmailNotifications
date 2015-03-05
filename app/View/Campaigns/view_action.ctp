@@ -58,7 +58,6 @@
           <th>IP</th>
           <th>Created</th>
           <th>Response</th>
-          <th>Message</th>
         </tr>
       </thead>
       <tbody>
@@ -68,7 +67,6 @@
             <td><?php echo $obj['ip']; ?></td>
             <td><?php echo $obj['created'] ?></td>
             <td><?php echo ucwords($obj['response']) ?></td>
-            <td><?php echo $obj['message']; ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

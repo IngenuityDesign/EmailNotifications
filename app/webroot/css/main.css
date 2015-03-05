@@ -129,3 +129,132 @@ body {
 .subtable-wrapper table {
   margin: 0 !important;
 }
+
+.yes, .no, .blue, .comment-id {
+  background-color: #0064d2;
+  color: white !important;
+  border-color: white;
+}
+
+a {
+  color: #0064d2;
+}
+
+.yes, .no {
+  text-align: center;
+}
+
+.yes {
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.no {
+  border-left-width: 1px;
+  border-left-style: solid;
+}
+
+.response-type {
+  text-align: center;
+
+}
+
+.table-main > tbody > tr > td {
+  color: #0064d2;
+  font-size: 13px;
+  border-top: 0px;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.table-main > tbody > tr > td,
+.table-main > thead > th > td {
+  
+}
+
+#table-main > thead > tr > th {
+  border-top: 1px solid #d6d6d6;
+}
+
+#table-main > thead > tr > th,
+#table-main > tbody > tr > td {
+  border-top-width: 1px !important;
+  border-color: #d6d6d6;
+  border-top-style: solid;
+  color: #808080;
+  font-size: 15px;
+  font-weight: 300;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-color: #d6d6d6;
+}
+
+#table-main tr.white  {
+  background-color: white !important;
+}
+
+#table-main tr.gray  {
+  background-color: #efefef !important;
+}
+
+td.email a{
+  color: #808080;
+}
+
+.comments {
+  text-align: center;
+}
+
+.comment-id div {
+  min-height: 73px;
+  line-height: 73px;
+  text-align: center;
+}
+
+.comment-text p {
+  color: #808080;
+  font-size: 13px;
+  padding: 15px;
+}
+
+.comments-table td {
+  border-top: 0px !important;
+}
+
+.table-main {
+  margin-top: 20px;
+}
+
+.comments a {
+  text-decoration: none;
+}
+
+a.collapsed .open {
+  display: none;
+}
+
+a .open {
+  display: inline;
+}
+
+a .closed {
+  display: none;
+}
+
+a.collapsed .closed {
+  display: inline;
+}
+
+
+h2 {
+  margin: 0; margin-top: 30px; text-align: center;
+}
+
+h1 {
+  color: #0064d2;
+  font-size: 40px;
+  text-align: center;
+  font-weight: 300;
+  margin: 15px 0 30px;
+}

@@ -30,7 +30,7 @@ your response gets us one step closer.</h2>
 		      <span class="input-group-addon">
 		        <input name="Feedback[ResponseType][<?php echo $obj['id']; ?>]" type="checkbox" value="1">
 		      </span>
-		      <label class="form-control"><?php echo $obj['label']; ?></label>
+		      <label class="form-control"><?php echo $obj['message']; ?></label>
 		    </div><!-- /input-group -->
 
 		<?php endforeach; ?>
