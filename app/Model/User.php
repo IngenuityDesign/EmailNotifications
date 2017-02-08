@@ -49,3 +49,4 @@ created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 */
 
 //PW GENERATOR: http://www.passwordtool.hu/blowfish-password-hash-generator
+//// app login: admin@aol.com/password | info@ingenuitydesign.com/password

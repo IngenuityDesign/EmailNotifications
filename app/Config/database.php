@@ -106,4 +106,5 @@ class DATABASE_CONFIG {
 	);
 }
 
-// app login: admin@aol.com/foo bar
+// app login: admin@aol.com/password
+//replace above with local MySQL creds and import .sql file in root directory
