@@ -86,10 +86,10 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => DATABASE_HOST,
-		'login' => DATABASE_USER,
-		'password' => DATABASE_PASSWORD,
-		'database' => DATABASE_DATABASE,
+    'host' => 'localhost',
+		'login' => 'root',
+		'password' => 'password',
+		'database' => 'cake',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
@@ -98,9 +98,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'user',
+		'login' => 'root',
 		'password' => 'password',
-		'database' => 'test_database_name',
+		'database' => 'cake',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

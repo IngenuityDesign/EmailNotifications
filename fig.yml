@@ -1,10 +1,10 @@
 db:
   image: mysql:latest
   environment:
-    MYSQL_ROOT_PASSWORD: "secretpassword"
-    MYSQL_USER: "app"
-    MYSQL_PASSWORD: "app_password"
-    MYSQL_DATABASE: "app"
+    MYSQL_ROOT_PASSWORD: "password"
+    MYSQL_USER: "root"
+    MYSQL_PASSWORD: "password"
+    MYSQL_DATABASE: "cake"
   # command: mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < init-script.sql
 web:
   build: .
@@ -14,9 +14,9 @@ web:
     - db
   environment:
     PHP_ENV: "development"
-    DATABASE_USER: "app"
-    DATABASE_HOST: "db"
-    DATABASE_PASSWORD: "app_password"
-    DATABASE_DATABASE: "app"
+    DATABASE_USER: "root"
+    DATABASE_HOST: "localhost"
+    DATABASE_PASSWORD: "password"
+    DATABASE_DATABASE: "cake"
   volumes:
     - .:/var/www/html/
