@@ -47,3 +47,5 @@ role VARCHAR(20),
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 */
+
+//PW GENERATOR: http://www.passwordtool.hu/blowfish-password-hash-generator
