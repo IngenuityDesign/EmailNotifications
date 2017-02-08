@@ -105,3 +105,5 @@ class DATABASE_CONFIG {
 		//'encoding' => 'utf8',
 	);
 }
+
+// app login: admin@aol.com/foo bar
